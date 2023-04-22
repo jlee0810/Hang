@@ -1,14 +1,48 @@
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import tw from "tailwind-react-native-classnames";
 import NavOptions from "../components/NavOptions";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setDestination, setOrigin } from "../slices/navSlice";
+import * as Location from "expo-location";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const origin = useSelector((state) => state.nav.origin);
+
+  useEffect(() => {
+    const getLocationAsync = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        console.log("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      dispatch(
+        setOrigin({
+          location: {
+            lat: location.coords.latitude,
+            lng: location.coords.longitude,
+          },
+          description: "Current location",
+        })
+      );
+    };
+    getLocationAsync();
+  }, []);
+
+  const onPlaceSelected = (data, details = null) => {
+    dispatch(
+      setOrigin({
+        location: details.geometry.location,
+        description: data.description,
+      })
+    );
+    dispatch(setDestination(null));
+  };
 
   return (
     <SafeAreaView style={`bg-white h-full`}>
@@ -30,24 +64,17 @@ const HomeScreen = () => {
               fontSize: 18,
             },
           }}
-          onPress={(data, details = null) => {
-            dispatch(
-              setOrigin({
-                location: details.geometry.location,
-                description: data.description,
-              })
-            );
-            dispatch(setDestination(null));
-          }}
+          onPress={onPlaceSelected}
           returnKeyType={"search"}
           fetchDetails={true}
           enablePoweredByContainer={false}
           query={{
             key: GOOGLE_MAPS_APIKEY,
             language: "en",
+            radius: 2000,
           }}
           debounce={400}
-          placeholder="Where are we headed?"
+          placeholder={origin?.description || "Where are we headed?"}
         />
 
         <NavOptions />
