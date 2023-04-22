@@ -9,6 +9,7 @@ import {
 import { Provider } from "react-redux";
 import { store } from "../store";
 import RegisterScreen from "./RegisterScreen";
+import ProfileScreen from "./ProfileScreen";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
 
@@ -22,7 +23,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   const handleRegisterPress = () => {
-    navigation.navigate("Register");
+    navigation.navigate("Profile");
   };
 
   return (

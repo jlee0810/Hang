@@ -1,62 +1,204 @@
-// import React from "react";
-// import {
-//   StyleSheet,
-//   View,
-//   Text,
-//   Image,
-//   SafeAreaView,
-//   ScrollView,
-// } from "react-native";
-// import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Image,
+  ScrollView,
+} from "react-native";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-// export default function ProfileScreen({ route }) {
-//   const { name, picture, age, location, bio } = route.params;
+export default function ProfileScreen() {
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.titleBar}>
+          <Ionicons name="ios-arrow-back" size={24} color="#52575D"></Ionicons>
+          <Ionicons name="md-more" size={24} color="#52575D"></Ionicons>
+        </View>
 
-//   return (
-//     <View style={tw`flex-1 bg-white`}>
-//       <View style={tw`bg-gray-100 p-4`}>
-//         <View style={tw`flex-row items-center`}>
-//           <Image source={{ uri: picture }} style={tw`w-20 h-20 rounded-full`} />
-//           <View style={tw`ml-4`}>
-//             <Text style={tw`text-2xl font-semibold`}>{name}</Text>
-//             <Text style={tw`text-gray-600`}>{age}</Text>
-//             <Text style={tw`text-gray-600`}>{location}</Text>
-//           </View>
-//         </View>
-//         <View style={tw`mt-4`}>
-//           <Text style={tw`text-lg font-semibold`}>Bio</Text>
-//           <Text style={tw`text-gray-600`}>{bio}</Text>
-//         </View>
-//       </View>
-//       <View style={tw`p-4`}>
-//         <Text style={tw`text-lg font-semibold mb-2`}>Photos</Text>
-//         {/* <View style={tw`flex-row flex-wrap justify-between`}>
-//           <Image
-//             source={require("../assets/images/photo1.jpg")}
-//             style={tw`w-48 h-48 mb-2`}
-//           />
-//           <Image
-//             source={require("../assets/images/photo2.jpg")}
-//             style={tw`w-48 h-48 mb-2`}
-//           />
-//           <Image
-//             source={require("../assets/images/photo3.jpg")}
-//             style={tw`w-48 h-48 mb-2`}
-//           />
-//           <Image
-//             source={require("../assets/images/photo4.jpg")}
-//             style={tw`w-48 h-48 mb-2`}
-//           />
-//           <Image
-//             source={require("../assets/images/photo5.jpg")}
-//             style={tw`w-48 h-48 mb-2`}
-//           />
-//           <Image
-//             source={require("../assets/images/photo6.jpg")}
-//             style={tw`w-48 h-48 mb-2`}
-//           />
-//         </View> */}
-//       </View>
-//     </View>
-//   );
-// }
+        <View style={{ alignSelf: "center" }}>
+          <View style={styles.profileImage}>
+            <Image //profile photo here
+              source={require("../assets/icon.png")}
+              style={styles.image}
+              resizeMode="center"
+            ></Image>
+          </View>
+          <View style={styles.dm}>
+            <MaterialIcons
+              name="chat"
+              size={18}
+              color="#DFD8C8"
+            ></MaterialIcons>
+          </View>
+          <View style={styles.active}></View>
+          <View style={styles.add}>
+            <Ionicons
+              name="ios-add"
+              size={48}
+              color="#DFD8C8"
+              style={{ marginTop: 6, marginLeft: 2 }}
+            ></Ionicons>
+          </View>
+        </View>
+
+        <View style={styles.infoContainer}>
+          <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>
+            Julie
+          </Text>
+          <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>
+            Photographer
+          </Text>
+        </View>
+
+        <View style={styles.statsContainer}>
+          <View style={styles.statsBox}>
+            <Text style={[styles.text, { fontSize: 24 }]}>483</Text>
+            <Text style={[styles.text, styles.subText]}>Posts</Text>
+          </View>
+          <View
+            style={[
+              styles.statsBox,
+              {
+                borderColor: "#DFD8C8",
+                borderLeftWidth: 1,
+                borderRightWidth: 1,
+              },
+            ]}
+          >
+            <Text style={[styles.text, { fontSize: 24 }]}>45,844</Text>
+            <Text style={[styles.text, styles.subText]}>Followers</Text>
+          </View>
+          <View style={styles.statsBox}>
+            <Text style={[styles.text, { fontSize: 24 }]}>302</Text>
+            <Text style={[styles.text, styles.subText]}>Following</Text>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FFF",
+  },
+  text: {
+    fontFamily: "HelveticaNeue",
+    color: "#52575D",
+  },
+  image: {
+    flex: 1,
+    height: undefined,
+    width: undefined,
+  },
+  titleBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 24,
+    marginHorizontal: 16,
+  },
+  subText: {
+    fontSize: 12,
+    color: "#AEB5BC",
+    textTransform: "uppercase",
+    fontWeight: "500",
+  },
+  profileImage: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    overflow: "hidden",
+  },
+  dm: {
+    backgroundColor: "#41444B",
+    position: "absolute",
+    top: 20,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  active: {
+    backgroundColor: "#34FFB9",
+    position: "absolute",
+    bottom: 28,
+    left: 10,
+    padding: 4,
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+  },
+  add: {
+    backgroundColor: "#41444B",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  infoContainer: {
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: 16,
+  },
+  statsContainer: {
+    flexDirection: "row",
+    alignSelf: "center",
+    marginTop: 32,
+  },
+  statsBox: {
+    alignItems: "center",
+    flex: 1,
+  },
+  mediaImageContainer: {
+    width: 180,
+    height: 200,
+    borderRadius: 12,
+    overflow: "hidden",
+    marginHorizontal: 10,
+  },
+  mediaCount: {
+    backgroundColor: "#41444B",
+    position: "absolute",
+    top: "50%",
+    marginTop: -50,
+    marginLeft: 30,
+    width: 100,
+    height: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 12,
+    shadowColor: "rgba(0, 0, 0, 0.38)",
+    shadowOffset: { width: 0, height: 10 },
+    shadowRadius: 20,
+    shadowOpacity: 1,
+  },
+  recent: {
+    marginLeft: 78,
+    marginTop: 32,
+    marginBottom: 6,
+    fontSize: 10,
+  },
+  recentItem: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: 16,
+  },
+  activityIndicator: {
+    backgroundColor: "#CABFAB",
+    padding: 4,
+    height: 12,
+    width: 12,
+    borderRadius: 6,
+    marginTop: 3,
+    marginRight: 20,
+  },
+});
