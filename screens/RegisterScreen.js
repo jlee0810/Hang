@@ -105,7 +105,7 @@ export default function RegisterScreen({ navigation }) {
 
               <TouchableOpacity
                 style={tw`bg-blue-500 py-2 px-4 rounded text-white font-bold mt-8 w-11/12`}
-                onPress={handleSubmit}
+                onPress={() => navigation.navigate("HomeScreen")}
               >
                 <Text style={tw`text-center`}>Create Account</Text>
               </TouchableOpacity>
