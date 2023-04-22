@@ -21,13 +21,17 @@ const HomeScreen = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
+      let [address] = await Location.reverseGeocodeAsync({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
       dispatch(
         setOrigin({
           location: {
             lat: location.coords.latitude,
             lng: location.coords.longitude,
           },
-          description: "Current location",
+          description: `${address.name}, ${address.street}, ${address.city}, ${address.region}, ${address.postalCode}, ${address.country}`,
         })
       );
     };
