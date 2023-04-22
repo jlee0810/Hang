@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "../store";
 import RegisterScreen from "./RegisterScreen";
 import tw from "tailwind-react-native-classnames";
+import { useNavigation } from "@react-navigation/native";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -52,7 +53,7 @@ export default function LoginScreen({ navigation }) {
               </View>
               <TouchableOpacity
                 style={tw`bg-blue-500 py-2 px-4 rounded text-white font-bold mt-8 w-11/12`}
-                onPress={handleSubmit}
+                onPress={() => navigation.navigate("HomeScreen")}
               >
                 <Text style={tw`text-center`}>Log in</Text>
               </TouchableOpacity>

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import tw from "tailwind-react-native-classnames";
 import NavOptions from "../components/NavOptions";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
@@ -11,32 +11,35 @@ import * as Location from "expo-location";
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const origin = useSelector((state) => state.nav.origin);
+  const [placeSelected, setPlaceSelected] = useState(false);
 
   useEffect(() => {
     const getLocationAsync = async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        console.log("Permission to access location was denied");
-        return;
-      }
+      console.log(placeSelected);
+      if (!placeSelected) {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          return;
+        }
 
-      let location = await Location.getCurrentPositionAsync({});
-      let [address] = await Location.reverseGeocodeAsync({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      });
-      dispatch(
-        setOrigin({
-          location: {
-            lat: location.coords.latitude,
-            lng: location.coords.longitude,
-          },
-          description: `${address.name}, ${address.street}, ${address.city}, ${address.region}, ${address.postalCode}, ${address.country}`,
-        })
-      );
+        let location = await Location.getCurrentPositionAsync({});
+        let [address] = await Location.reverseGeocodeAsync({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        });
+        dispatch(
+          setOrigin({
+            location: {
+              lat: location.coords.latitude,
+              lng: location.coords.longitude,
+            },
+            description: `${address.name}, ${address.street}, ${address.city}, ${address.region}, ${address.postalCode}, ${address.country}`,
+          })
+        );
+      }
     };
     getLocationAsync();
-  }, []);
+  }, [placeSelected]);
 
   const onPlaceSelected = (data, details = null) => {
     dispatch(
@@ -46,6 +49,7 @@ const HomeScreen = () => {
       })
     );
     dispatch(setDestination(null));
+    setPlaceSelected(true);
   };
 
   return (
