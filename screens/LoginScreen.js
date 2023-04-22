@@ -11,6 +11,7 @@ import { store } from "../store";
 import RegisterScreen from "./RegisterScreen";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
+import SearchBar from "../components/SearchBar";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   const handleRegisterPress = () => {
-    navigation.navigate("Register");
+    navigation.navigate("Profile");
   };
 
   return (
@@ -30,7 +31,7 @@ export default function LoginScreen({ navigation }) {
       <SafeAreaView style={tw`bg-gray-50 h-full`}>
         <View style={tw`flex-1 bg-white items-center justify-center`}>
           <View style={tw`w-11/12 mb-8`}>
-            <Text style={tw`text-4xl font-bold mb-4`}>Login</Text>
+            {/* <Text style={tw`text-4xl font-bold mb-4`}>Login</Text> */}
             <View style={tw`bg-white shadow-md rounded-lg p-8`}>
               <View style={tw`mb-4`}>
                 <Text style={tw`text-lg font-semibold mb-2`}>Email</Text>

@@ -7,6 +7,7 @@ import MainScreen from "./screens/MainScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ProfileScreen from "./screens/ProfileScreen";
 
 const Stack = createNativeStackNavigator();
 import HomeScreen from "./screens/HomeScreen";
@@ -34,8 +35,8 @@ export default function App() {
               options={{
                 headerShown: false,
                 gestureResponseDistance: { vertical: 200, horizontal: 150 },
-              }}
-            />
+              }}/>
+            <Stack.Screen name="Profile" component={ProfileScreen} />
           </Stack.Navigator>
         </SafeAreaProvider>
       </NavigationContainer>
