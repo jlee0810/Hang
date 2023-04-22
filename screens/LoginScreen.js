@@ -15,7 +15,7 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = ({ navigation }) => {
+  const handleSubmit = ({}) => {
     console.log("Email:", email);
     console.log("Password:", password);
   };
