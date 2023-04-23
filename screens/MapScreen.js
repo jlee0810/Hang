@@ -9,7 +9,7 @@ import {
 import React, { useState, useEffect } from "react";
 import tw from "tailwind-react-native-classnames";
 import Map from "../components/Map";
-import Stops from "../components/Stops";
+import Destination from "../components/Destination";
 import MapView from "react-native-maps";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NavigateCard from "../components/NavigateCard";
@@ -17,7 +17,7 @@ import CourseOptionsCards from "../components/CourseOptionsCards";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useDispatch, useSelector } from "react-redux";
-import { setStops, setOrigin } from "../slices/navSlice";
+import { setDestination, setOrigin } from "../slices/navSlice";
 import * as Location from "expo-location";
 import Itinerary from "../components/Itinerary";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -66,7 +66,7 @@ const MapScreen = ({ navigation }) => {
         description: data.description,
       })
     );
-    dispatch(setStops(null));
+    dispatch(setDestination(null));
     setPlaceSelected(true);
   };
 
@@ -152,7 +152,7 @@ const MapScreen = ({ navigation }) => {
               </View>
             </Modal>
           </View>
-          <Stops />
+          <Destination />
         </View>
       </SafeAreaView>
 
