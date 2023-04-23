@@ -26,7 +26,7 @@ const mockData = {
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const anchorRef = useRef(null);
 
   const handleSearchInputChange = (text) => {

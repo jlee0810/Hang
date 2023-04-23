@@ -15,14 +15,51 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [gender, setGender] = useState("");
-  const [zipcode, setZipCode] = React.useState("");
+  const [username, setUsername] = React.useState("");
 
-  const handleSubmit = () => {
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("Gender:", gender);
-    console.log("ZipCode:", zipcode);
-  };
+  // const handleSubmit = () => {
+  //   console.log("Email:", email);
+  //   console.log("Password:", password);
+  //   console.log("Gender:", gender);
+  //   console.log("ZipCode:", zipcode);
+  // };
+
+  const handleSubmit = async (event) => {
+        event.preventDefault();
+        const postData = {
+        email: email.toLowerCase(),
+        password: password,
+        gender: gender,
+        username: username,
+      };
+
+    const res = await fetch(`http://localhost:3001/api/auth/patient`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(postData)}
+    ).then(r => r.json());
+
+    console.log(res);
+
+    if(res.success){
+      toast.success("User signed up succesfully", {
+        autoClose: 2000,
+        position: toast.POSITION.TOP_CENTER
+      });
+      navigate('/signin')
+    }
+    else {
+      console.log("Signup error", res);
+      toast.error(res.data.message, {
+        autoClose: 2000,
+        position: toast.POSITION.TOP_CENTER
+      })
+    }
+  }
+
 
   const handleGenderSelection = (value) => {
     setGender(value);
@@ -98,8 +135,8 @@ export default function RegisterScreen({ navigation }) {
                 <TextInput
                   style={tw`border border-gray-300 p-2 rounded-lg w-full`}
                   placeholder="000000"
-                  value={zipcode}
-                  onChangeText={(text) => setZipcode(text)}
+                  value={username}
+                  onChangeText={(text) => setUsername(text)}
                 />
               </View>
 

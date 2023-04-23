@@ -14,12 +14,31 @@ import { useNavigation } from "@react-navigation/native";
 import SearchBar from "../components/SearchBar";
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = ({}) => {
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const handleSubmit = async () => {
+   const postData = {
+      username: username.toLowerCase(),
+      password: password,
+    };
+
+    const res = await fetch(`http://localhost:3001/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(postData)}
+    ).then(r => r.json());
+
+    console.log(res);
+
+    if(res.msg === "success") {
+      console.warn("FUCK")
+      navigation.navigate("MapScreen");
+    }
+
   };
 
   return (
@@ -33,8 +52,8 @@ export default function LoginScreen({ navigation }) {
               <TextInput
                 style={tw`border border-gray-300 p-2 rounded-lg w-full`}
                 placeholder="youremail@example.com"
-                value={email}
-                onChangeText={(text) => setEmail(text)}
+                value={username}
+                onChangeText={(text) => setUsername(text)}
               />
             </View>
             <View style={tw`mb-4`}>
@@ -49,7 +68,7 @@ export default function LoginScreen({ navigation }) {
             </View>
             <TouchableOpacity
               style={tw`bg-blue-500 py-2 px-4 rounded text-white font-bold mt-8 w-11/12`}
-              onPress={() => navigation.navigate("MapScreen")}
+              onPress={handleSubmit}
             >
               <Text style={tw`text-center`}>Log in</Text>
             </TouchableOpacity>
@@ -58,7 +77,7 @@ export default function LoginScreen({ navigation }) {
                 Don't have an account?
               </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Register")}
+                onPress={handleSubmit}
               >
                 <Text style={tw`text-sm text-blue-500 font-bold ml-1`}>
                   Register
