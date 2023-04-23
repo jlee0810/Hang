@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, View, SafeAreaView, Text } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
@@ -12,13 +12,12 @@ const Destination = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={tw`bg-white flex-1`}>
-      <Text style={tw`text-center py-5 text-xl`}> Select the Destination</Text>
+    <SafeAreaView style={tw`flex-1`}>
       <View style={tw`border-t border-gray-200 flex-shrink`}>
         <View>
           <GooglePlacesAutocomplete
             placeholder="Type Destination Here..."
-            style={toInputBoxStyles}
+            styles={toInputBoxStyles}
             fetchDetails={true}
             returnKeyType={"search"}
             minLength={2}
@@ -29,7 +28,6 @@ const Destination = () => {
                   description: data.description,
                 })
               );
-              // navigation.navigate("RideOptions");
             }}
             enablePoweredByContainer={false}
             query={{
@@ -47,9 +45,26 @@ const Destination = () => {
 
 const toInputBoxStyles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
-    paddingTop: 20,
-    flex: 0,
+    flex: 1,
+    justifyContent: "center",
+  },
+  textInput: {
+    height: 40,
+    color: "#5d5d5d",
+    fontSize: 16,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 20,
+    paddingHorizontal: 16,
+  },
+  listView: {
+    position: "absolute",
+    top: 60,
+    left: 10,
+    right: 10,
+    borderRadius: 5,
+    elevation: 3,
+    zIndex: 10,
   },
 });
 

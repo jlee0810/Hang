@@ -12,33 +12,33 @@ import RegisterScreen from "./RegisterScreen";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
 import SearchBar from "../components/SearchBar";
+import MapScreen from "./MapScreen";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async () => {
-   const postData = {
+    const postData = {
       username: username.toLowerCase(),
       password: password,
     };
 
     const res = await fetch(`http://localhost:3001/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      credentials: 'include',
-      body: JSON.stringify(postData)}
-    ).then(r => r.json());
+      credentials: "include",
+      body: JSON.stringify(postData),
+    }).then((r) => r.json());
 
     console.log(res);
 
-    if(res.msg === "success") {
-      console.warn("FUCK")
+    if (res.msg === "success") {
+      console.warn("FUCK");
       navigation.navigate("MapScreen");
     }
-
   };
 
   return (
@@ -76,9 +76,7 @@ export default function LoginScreen({ navigation }) {
               <Text style={tw`text-sm text-gray-500`}>
                 Don't have an account?
               </Text>
-              <TouchableOpacity
-                onPress={handleSubmit}
-              >
+              <TouchableOpacity onPress={navigation.navigate("MapScreen")}>
                 <Text style={tw`text-sm text-blue-500 font-bold ml-1`}>
                   Register
                 </Text>
