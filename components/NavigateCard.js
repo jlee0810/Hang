@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import tw from "tailwind-react-native-classnames";
+import CourseOptionsCards from "./CourseOptionsCards";
 
 const NavigateCard = () => {
   const [selectedTab, setSelectedTab] = useState("nearYou");
@@ -18,22 +19,19 @@ const NavigateCard = () => {
 
   const renderNearYouCards = () => {
     return (
-      <ScrollView horizontal={true}>
-        <View style={{ width: 200, backgroundColor: "#f2f2f2", margin: 10 }}>
-          <Text style={{ padding: 10 }}>Card 1</Text>
-        </View>
-        <View style={{ width: 200, backgroundColor: "#f2f2f2", margin: 10 }}>
-          <Text style={{ padding: 10 }}>Card 2</Text>
-        </View>
-        <View style={{ width: 200, backgroundColor: "#f2f2f2", margin: 10 }}>
-          <Text style={{ padding: 10 }}>Card 3</Text>
-        </View>
+      <ScrollView>
+        <CourseOptionsCards />
       </ScrollView>
     );
   };
 
   const renderRecentlyAddedCards = () => {
     // implementation for recently added cards
+    return (
+      <ScrollView>
+        <CourseOptionsCards />
+      </ScrollView>
+    );
   };
 
   return (
