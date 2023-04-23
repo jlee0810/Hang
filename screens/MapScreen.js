@@ -14,6 +14,7 @@ import MapView from "react-native-maps";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NavigateCard from "../components/NavigateCard";
 import CourseOptionsCards from "../components/CourseOptionsCards";
+import LocationPin from "../components/LocationPin";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useDispatch, useSelector } from "react-redux";
@@ -75,10 +76,9 @@ const MapScreen = ({ navigation }) => {
       <View style={tw`h-3/5`}>
         <Map />
       </View>
+      <LocationPin />
       <SafeAreaView style={tw`absolute top-0 left-0 right-0 p-4`}>
-        <View
-          style={tw`flex-row items-center justify-center py-3 rounded-full`}
-        >
+        <View style={tw`flex-row items-center justify-center py-3`}>
           <GooglePlacesAutocomplete
             nearbyPlacesAPI="GooglePlacesSearch"
             onPress={onPlaceSelected}
@@ -91,13 +91,11 @@ const MapScreen = ({ navigation }) => {
               radius: 2000,
             }}
             debounce={400}
-            placeholder={"Where Do you want to Hang?"}
+            placeholder={"Where you want to go?"}
             styles={{
               container: {
                 flex: 1,
                 justifyContent: "center",
-                paddingLeft: 10,
-                paddingRight: 10, // add padding to the sides
               },
               textInput: {
                 height: 40,
@@ -120,6 +118,7 @@ const MapScreen = ({ navigation }) => {
               },
             }}
           />
+          <Destination />
           <View>
             <TouchableOpacity
               onPress={() => setMenuVisibility(true)}
@@ -152,7 +151,6 @@ const MapScreen = ({ navigation }) => {
               </View>
             </Modal>
           </View>
-          <Destination />
         </View>
       </SafeAreaView>
 
