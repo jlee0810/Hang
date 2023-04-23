@@ -11,18 +11,18 @@ import {
 import MapViewDirections from "react-native-maps-directions";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 
-const MOCK_DATA = [
-  { id: 1, name: "Waypoint 1", latitude: 34.0083, longitude: -118.4988 },
-  { id: 2, name: "Waypoint 2", latitude: 34.0063, longitude: -118.493 },
-  { id: 3, name: "Waypoint 3", latitude: 34.0043, longitude: -118.495 },
-];
+// const MOCK_DATA = [
+//   { id: 1, name: "Waypoint 1", latitude: 34.0083, longitude: -118.4988 },
+//   { id: 2, name: "Waypoint 2", latitude: 34.0063, longitude: -118.493 },
+//   { id: 3, name: "Waypoint 3", latitude: 34.0043, longitude: -118.495 },
+// ];
 
 const Map = ({ data }) => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
 
-  const waypoints = useSelector(selectWayPoints);
-  console.log(waypoints);
+  const MOCK_DATA = useSelector(selectWayPoints);
+  console.log(MOCK_DATA);
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -70,15 +70,17 @@ const Map = ({ data }) => {
         />
       )}
 
-      <Marker
-        key={waypoints.id}
-        coordinate={{
-          latitude: waypoints.latitude,
-          longitude: waypoints.longitude,
-        }}
-        title={waypoints.name}
-        identifier={waypoints.id}
-      />
+      {MOCK_DATA.map((waypoint) => (
+        <Marker
+          key={waypoint.id}
+          coordinate={{
+            latitude: waypoint.latitude,
+            longitude: waypoint.longitude,
+          }}
+          title={waypoint.name}
+          identifier={waypoint.id.toString()}
+        />
+      ))}
     </MapView>
   );
 };

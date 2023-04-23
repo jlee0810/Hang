@@ -26,7 +26,7 @@ const CourseOptionsCards = () => {
         longitude: -118.360565,
       },
       {
-        id: 2,
+        id: 3,
         name: "TCL Chinese Theatre",
         latitude: 34.102047,
         longitude: -118.34108,
