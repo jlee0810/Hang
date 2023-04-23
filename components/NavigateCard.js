@@ -9,7 +9,7 @@ import {
 import React, { useState } from "react";
 import tw from "tailwind-react-native-classnames";
 import CourseOptionsCards from "./CourseOptionsCards";
-
+import CourseOptionsCards2 from "./CourseOptionsCards2";
 const NavigateCard = () => {
   const [selectedTab, setSelectedTab] = useState("nearYou");
 
@@ -21,6 +21,7 @@ const NavigateCard = () => {
     return (
       <ScrollView>
         <CourseOptionsCards />
+        <CourseOptionsCards2 />
       </ScrollView>
     );
   };
@@ -30,6 +31,7 @@ const NavigateCard = () => {
     return (
       <ScrollView>
         <CourseOptionsCards />
+        <CourseOptionsCards2 />
       </ScrollView>
     );
   };
