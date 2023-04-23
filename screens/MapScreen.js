@@ -85,7 +85,7 @@ const MapScreen = ({ navigation }) => {
               radius: 2000,
             }}
             debounce={400}
-            placeholder={origin?.description || "Where are we headed?"}
+            placeholder={origin?.description || "Where are we headed ?"}
             styles={{
               container: {
                 flex: 1,
