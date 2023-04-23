@@ -52,6 +52,7 @@ const Map = ({ data }) => {
         <MapViewDirections
           origin={origin.description}
           destination={destination.description}
+          waypoints={MOCK_DATA}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={10}
           strokeColor="blue"
