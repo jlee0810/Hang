@@ -3,7 +3,11 @@ import { StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import tw from "tailwind-react-native-classnames";
 import { useSelector } from "react-redux";
-import { selectOrigin, selectDestination } from "../slices/navSlice";
+import {
+  selectOrigin,
+  selectDestination,
+  selectWayPoints,
+} from "../slices/navSlice";
 import MapViewDirections from "react-native-maps-directions";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 
@@ -14,9 +18,12 @@ const MOCK_DATA = [
 ];
 import * as Location from "expo-location";
 
-const Map = () => {
+const Map = ({ data }) => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
+
+  const MOCK_DATA = useSelector(selectWayPoints);
+  console.log(MOCK_DATA);
   const mapRef = useRef(null);
   const [userLocation, setUserLocation] = useState(null);
 
