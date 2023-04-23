@@ -1,23 +1,25 @@
 import {
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
+  Modal,
+  Text,
   TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import tw from "tailwind-react-native-classnames";
 import Map from "../components/Map";
-import MapView from "react-native-maps";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NavigateCard from "../components/NavigateCard";
-import { Ionicons } from "@expo/vector-icons";
 import CourseOptionsCards from "../components/CourseOptionsCards";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { useDispatch, useSelector } from "react-redux";
-import { setDestination, setOrigin } from "../slices/navSlice";
+import { setStops, setOrigin } from "../slices/navSlice";
 import * as Location from "expo-location";
+import Itinerary from "../components/Itinerary";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 const MapScreen = ({ navigation }) => {
   const Stack = createNativeStackNavigator();
@@ -25,6 +27,8 @@ const MapScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const origin = useSelector((state) => state.nav.origin);
   const [placeSelected, setPlaceSelected] = useState(false);
+
+  const [isMenuVisible, setMenuVisibility] = useState(false);
 
   useEffect(() => {
     const getLocationAsync = async () => {
@@ -60,7 +64,7 @@ const MapScreen = ({ navigation }) => {
         description: data.description,
       })
     );
-    dispatch(setDestination(null));
+    dispatch(setStops(null));
     setPlaceSelected(true);
   };
 
@@ -114,6 +118,38 @@ const MapScreen = ({ navigation }) => {
               },
             }}
           />
+          <View>
+            <TouchableOpacity
+              onPress={() => setMenuVisibility(true)}
+              style={styles.hamburgerButton}
+            >
+              <Icon name="bars" size={30} color="#000" />
+            </TouchableOpacity>
+
+            <Modal visible={isMenuVisible} animationType="slide">
+              <View style={styles.modalContent}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setMenuVisibility(false);
+                    navigation.navigate("Profile");
+                  }}
+                >
+                  <Text style={styles.menuOption}>Profile Search</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setMenuVisibility(false);
+                    navigation.navigate("Post");
+                  }}
+                >
+                  <Text style={styles.menuOption}>Write a post</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setMenuVisibility(false)}>
+                  <Text style={styles.closeButton}>Close</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
+          </View>
         </View>
       </SafeAreaView>
 
@@ -129,6 +165,11 @@ const MapScreen = ({ navigation }) => {
             component={CourseOptionsCards}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="Itinerary"
+            component={Itinerary}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </View>
     </View>
@@ -137,4 +178,22 @@ const MapScreen = ({ navigation }) => {
 
 export default MapScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  hamburgerButton: {
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  modalContent: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  menuOption: {
+    fontSize: 24,
+    margin: 20,
+  },
+  closeButton: {
+    fontSize: 24,
+    margin: 20,
+  },
+});

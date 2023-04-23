@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   origin: null,
-  destination: null,
+  stops: null,
   travelTimeInformation: null,
 };
 
@@ -14,8 +14,8 @@ export const navSlice = createSlice({
     setOrigin: (state, action) => {
       state.origin = action.payload;
     },
-    setDestination: (state, action) => {
-      state.destination = action.payload;
+    setStops: (state, action) => {
+      state.stops = action.payload;
     },
     setTravelTimeInformation: (state, action) => {
       state.travelTimeInformation = action.payload;
@@ -24,12 +24,12 @@ export const navSlice = createSlice({
 });
 
 //actions
-export const { setOrigin, setDestination, setTravelTimeInformation } =
+export const { setOrigin, setStops, setTravelTimeInformation } =
   navSlice.actions;
 
 //grab information from the data layer
 export const selectOrigin = (state) => state.nav.origin;
-export const selectDestination = (state) => state.nav.destination;
+export const selectStops = (state) => state.nav.stops;
 export const selectTravelTimeInformation = (state) =>
   state.nav.travelTimeInformation;
 
