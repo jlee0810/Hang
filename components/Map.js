@@ -6,6 +6,13 @@ import { useSelector } from "react-redux";
 import { selectOrigin, selectDestination } from "../slices/navSlice";
 import MapViewDirections from "react-native-maps-directions";
 import { GOOGLE_MAPS_APIKEY } from "@env";
+
+const MOCK_DATA = [
+  { id: 1, name: "Waypoint 1", latitude: 34.0083, longitude: -118.4988 },
+  { id: 2, name: "Waypoint 2", latitude: 34.0063, longitude: -118.4930 },
+  { id: 3, name: "Waypoint 3", latitude: 34.0043, longitude: -118.4950 },
+];
+
 const Map = () => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
@@ -38,9 +45,10 @@ const Map = () => {
         <MapViewDirections
           origin={origin.description}
           destination={destination.description}
+          waypoints={MOCK_DATA}
           apikey={GOOGLE_MAPS_APIKEY}
-          storkeWidth={3}
-          strokeColor="black"
+          strokeWidth={10}
+          strokeColor="blue"
         />
       )}
 
@@ -55,6 +63,18 @@ const Map = () => {
           identifier="origin"
         />
       )}
+
+      {MOCK_DATA.map((waypoint) => (
+        <Marker
+          key={waypoint.id}
+          coordinate={{
+            latitude: waypoint.latitude,
+            longitude: waypoint.longitude,
+          }}
+          title={waypoint.name}
+          identifier={waypoint.id.toString()}
+        />
+      ))}
     </MapView>
   );
 };
