@@ -3,19 +3,26 @@ import React, { useRef, useEffect } from "react";
 import MapView, { Marker } from "react-native-maps";
 import tw from "tailwind-react-native-classnames";
 import { useSelector } from "react-redux";
-import { selectOrigin, selectDestination } from "../slices/navSlice";
+import {
+  selectOrigin,
+  selectDestination,
+  selectWayPoints,
+} from "../slices/navSlice";
 import MapViewDirections from "react-native-maps-directions";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 
 const MOCK_DATA = [
   { id: 1, name: "Waypoint 1", latitude: 34.0083, longitude: -118.4988 },
-  { id: 2, name: "Waypoint 2", latitude: 34.0063, longitude: -118.4930 },
-  { id: 3, name: "Waypoint 3", latitude: 34.0043, longitude: -118.4950 },
+  { id: 2, name: "Waypoint 2", latitude: 34.0063, longitude: -118.493 },
+  { id: 3, name: "Waypoint 3", latitude: 34.0043, longitude: -118.495 },
 ];
 
-const Map = () => {
+const Map = ({ data }) => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
+
+  const waypoints = useSelector(selectWayPoints);
+  console.log(waypoints);
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -45,7 +52,6 @@ const Map = () => {
         <MapViewDirections
           origin={origin.description}
           destination={destination.description}
-          waypoints={MOCK_DATA}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={10}
           strokeColor="blue"
@@ -64,17 +70,15 @@ const Map = () => {
         />
       )}
 
-      {MOCK_DATA.map((waypoint) => (
-        <Marker
-          key={waypoint.id}
-          coordinate={{
-            latitude: waypoint.latitude,
-            longitude: waypoint.longitude,
-          }}
-          title={waypoint.name}
-          identifier={waypoint.id.toString()}
-        />
-      ))}
+      <Marker
+        key={waypoints.id}
+        coordinate={{
+          latitude: waypoints.latitude,
+          longitude: waypoints.longitude,
+        }}
+        title={waypoints.name}
+        identifier={waypoints.id}
+      />
     </MapView>
   );
 };

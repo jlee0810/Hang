@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   origin: null,
   destination: null,
   travelTimeInformation: null,
+  wayPoints: [],
 };
 
-//push information to data layer
 export const navSlice = createSlice({
   name: "nav",
   initialState,
@@ -20,17 +19,32 @@ export const navSlice = createSlice({
     setTravelTimeInformation: (state, action) => {
       state.travelTimeInformation = action.payload;
     },
+    setWayPoints: (state, action) => {
+      state.wayPoints = [action.payload];
+    },
+    addWayPoint: (state, action) => {
+      state.wayPoints.push(action.payload);
+    },
+    removeWayPoint: (state, action) => {
+      state.wayPoints.splice(action.payload, 1);
+    },
   },
 });
 
-//actions
-export const { setOrigin, setDestination, setTravelTimeInformation } =
-  navSlice.actions;
+export const {
+  setOrigin,
+  setDestination,
+  setWayPoints,
+  setTravelTimeInformation,
+  addWayPoint,
+  removeWayPoint,
+} = navSlice.actions;
 
-//grab information from the data layer
 export const selectOrigin = (state) => state.nav.origin;
 export const selectDestination = (state) => state.nav.destination;
 export const selectTravelTimeInformation = (state) =>
   state.nav.travelTimeInformation;
+
+export const selectWayPoints = (state) => state.nav.wayPoints;
 
 export default navSlice.reducer;
