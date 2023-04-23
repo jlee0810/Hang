@@ -91,11 +91,13 @@ const MapScreen = ({ navigation }) => {
               radius: 2000,
             }}
             debounce={400}
-            placeholder={"Where you want to go?"}
+            placeholder={"Starting Point"}
             styles={{
               container: {
                 flex: 1,
                 justifyContent: "center",
+                marginLeft: 10,
+                marginRight:5, 
               },
               textInput: {
                 height: 40,

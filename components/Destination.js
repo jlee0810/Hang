@@ -16,7 +16,7 @@ const Destination = () => {
       <View style={tw`border-t border-gray-200 flex-shrink`}>
         <View>
           <GooglePlacesAutocomplete
-            placeholder="Type Destination Here..."
+            placeholder="Destination Point"
             styles={toInputBoxStyles}
             fetchDetails={true}
             returnKeyType={"search"}
