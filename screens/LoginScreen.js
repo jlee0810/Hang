@@ -18,27 +18,26 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async () => {
-   const postData = {
+    const postData = {
       username: username.toLowerCase(),
       password: password,
     };
 
     const res = await fetch(`http://localhost:3001/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      credentials: 'include',
-      body: JSON.stringify(postData)}
-    ).then(r => r.json());
+      credentials: "include",
+      body: JSON.stringify(postData),
+    }).then((r) => r.json());
 
     console.log(res);
 
-    if(res.msg === "success") {
-      console.warn("FUCK")
+    if (res.msg === "success") {
+      console.warn("FUCK");
       navigation.navigate("MapScreen");
     }
-
   };
 
   return (
@@ -68,7 +67,7 @@ export default function LoginScreen({ navigation }) {
             </View>
             <TouchableOpacity
               style={tw`bg-blue-500 py-2 px-4 rounded text-white font-bold mt-8 w-11/12`}
-              onPress={handleSubmit}
+              onPress={() => navigation.navigate("MapScreen")}
             >
               <Text style={tw`text-center`}>Log in</Text>
             </TouchableOpacity>
@@ -77,7 +76,7 @@ export default function LoginScreen({ navigation }) {
                 Don't have an account?
               </Text>
               <TouchableOpacity
-                onPress={handleSubmit}
+                onPress={() => navigation.navigate("Register")}
               >
                 <Text style={tw`text-sm text-blue-500 font-bold ml-1`}>
                   Register
