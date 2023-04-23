@@ -54,7 +54,7 @@ export default function LoginScreen({ navigation }) {
               </View>
               <TouchableOpacity
                 style={tw`bg-blue-500 py-2 px-4 rounded text-white font-bold mt-8 w-11/12`}
-                onPress={() => navigation.navigate("HomeScreen")}
+                onPress={() => navigation.navigate("MapScreen")}
               >
                 <Text style={tw`text-center`}>Log in</Text>
               </TouchableOpacity>

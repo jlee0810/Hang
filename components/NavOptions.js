@@ -16,7 +16,7 @@ import { selectOrigin } from "../slices/navSlice";
 const data = [
   {
     id: "123",
-    title: "Get a ride",
+    title: "Search",
     image: "https://links.papareact.com/3pn",
     screen: "MapScreen", //what screen it should go to
   },
