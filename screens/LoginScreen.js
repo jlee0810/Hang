@@ -3,8 +3,9 @@ import {
   View,
   Text,
   TextInput,
-  SafeAreaView,
   TouchableOpacity,
+  Image,
+  SafeAreaView,
 } from "react-native";
 import { Provider } from "react-redux";
 import { store } from "../store";
@@ -13,6 +14,7 @@ import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
 import SearchBar from "../components/SearchBar";
 import MapScreen from "./MapScreen";
+import Logo from "../assets/splash.png";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -44,14 +46,15 @@ export default function LoginScreen({ navigation }) {
   return (
     <Provider store={store}>
       <View style={tw`flex-1 bg-white items-center justify-center`}>
+        <Image source={Logo} style={tw`w-40 h-40 self-center mt-8 mb-8`} />
         <View style={tw`w-11/12 mb-8`}>
           {/* <Text style={tw`text-4xl font-bold mb-4`}>Login</Text> */}
           <View style={tw`bg-white shadow-md rounded-lg p-8`}>
             <View style={tw`mb-4`}>
-              <Text style={tw`text-lg font-semibold mb-2`}>Email</Text>
+              <Text style={tw`text-lg font-semibold mb-2`}>Username</Text>
               <TextInput
                 style={tw`border border-gray-300 p-2 rounded-lg w-full`}
-                placeholder="youremail@example.com"
+                placeholder="Username"
                 value={username}
                 onChangeText={(text) => setUsername(text)}
               />
@@ -76,9 +79,7 @@ export default function LoginScreen({ navigation }) {
               <Text style={tw`text-sm text-gray-500`}>
                 Don't have an account?
               </Text>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("Register")}
-              >
+              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
                 <Text style={tw`text-sm text-blue-500 font-bold ml-1`}>
                   Register
                 </Text>

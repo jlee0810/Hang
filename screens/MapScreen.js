@@ -30,8 +30,12 @@ const MapScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const origin = useSelector((state) => state.nav.origin);
   const [placeSelected, setPlaceSelected] = useState(false);
-
+  const [dark, setDark] = useState(false)
   const [isMenuVisible, setMenuVisibility] = useState(false);
+
+  const handleDark = () => {
+    setDark(!dark)
+  }
 
   useEffect(() => {
     const getLocationAsync = async () => {
@@ -74,7 +78,7 @@ const MapScreen = ({ navigation }) => {
   return (
     <View style={tw`flex-1`}>
       <View style={tw`h-3/5`}>
-        <Map />
+        <Map dark={dark} />
       </View>
       <LocationPin />
       <SafeAreaView style={tw`absolute top-0 left-0 right-0 p-4`}>
@@ -122,6 +126,7 @@ const MapScreen = ({ navigation }) => {
           />
           <Destination />
           <View>
+            
             <TouchableOpacity
               onPress={() => setMenuVisibility(true)}
               style={styles.hamburgerButton}
@@ -131,6 +136,14 @@ const MapScreen = ({ navigation }) => {
 
             <Modal visible={isMenuVisible} animationType="slide">
               <View style={styles.modalContent}>
+              <TouchableOpacity
+                  onPress={() => {
+                    setMenuVisibility(false);
+                    handleDark();
+                  }}
+                >
+                  <Text style={styles.menuOption}>{dark ? 'Light' : 'Dark'}</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
                     setMenuVisibility(false);
@@ -139,6 +152,7 @@ const MapScreen = ({ navigation }) => {
                 >
                   <Text style={styles.menuOption}>Profile Search</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity
                   onPress={() => {
                     setMenuVisibility(false);
@@ -147,6 +161,8 @@ const MapScreen = ({ navigation }) => {
                 >
                   <Text style={styles.menuOption}>Write a post</Text>
                 </TouchableOpacity>
+                
+                
                 <TouchableOpacity onPress={() => setMenuVisibility(false)}>
                   <Text style={styles.closeButton}>Close</Text>
                 </TouchableOpacity>

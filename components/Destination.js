@@ -13,7 +13,7 @@ const Destination = () => {
 
   return (
     <SafeAreaView style={tw`flex-1`}>
-      <View style={tw`border-t border-gray-200 flex-shrink`}>
+      <View style={tw`flex-shrink`}>
         <View>
           <GooglePlacesAutocomplete
             placeholder="Destination Point"
