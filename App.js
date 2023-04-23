@@ -11,7 +11,7 @@ import PostScreen from "./screens/PostScreen";
 const Stack = createNativeStackNavigator();
 import MapScreen from "./screens/MapScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
+import { Provider as PaperProvider } from "react-native-paper";
 export default function App() {
   //equivalent to router
   const Stack = createNativeStackNavigator();
@@ -38,6 +38,12 @@ export default function App() {
             />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Post" component={PostScreen} />
+            {/* <Stack.Screen name="Connect" component={ConnectScreen} /> */}
+            {/* <Stack.Screen
+              name="MapScreen"
+              component={BottomTabNavigator}
+              options={{ headerShown: false }}
+            /> */}
           </Stack.Navigator>
         </SafeAreaProvider>
       </NavigationContainer>

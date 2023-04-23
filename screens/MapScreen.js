@@ -9,6 +9,8 @@ import {
 import React, { useState, useEffect } from "react";
 import tw from "tailwind-react-native-classnames";
 import Map from "../components/Map";
+import Stops from "../components/Stops";
+import MapView from "react-native-maps";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NavigateCard from "../components/NavigateCard";
 import CourseOptionsCards from "../components/CourseOptionsCards";
@@ -89,7 +91,7 @@ const MapScreen = ({ navigation }) => {
               radius: 2000,
             }}
             debounce={400}
-            placeholder={origin?.description || "Where are we headed ?"}
+            placeholder={"Where Do you want to Hang?"}
             styles={{
               container: {
                 flex: 1,
@@ -150,6 +152,7 @@ const MapScreen = ({ navigation }) => {
               </View>
             </Modal>
           </View>
+          <Stops />
         </View>
       </SafeAreaView>
 
