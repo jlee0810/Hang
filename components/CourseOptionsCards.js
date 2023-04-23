@@ -56,15 +56,14 @@ const CourseOptionsCards = () => {
     <ScrollView>
       <TouchableOpacity onPress={() => handleCardPress()}>
         <View style={styles.card}>
-          <Text style={styles.title}>Museum of Modern Art</Text>
-          <Text style={styles.info}>
-            Address: 11 W 53rd St, New York, NY 10019
+          <Text style={styles.title}>
+            Best Hollywood date to take your girl
           </Text>
-          <Text style={styles.info}>Phone: (212) 708-9400</Text>
+          <Text style={styles.info}>Author: Seoungmin Kim</Text>
+          <Text style={styles.info}>Likes: 10k</Text>
           <Text style={[styles.description]}>
-            The Museum of Modern Art is an art museum located in Midtown
-            Manhattan, New York City, on 53rd Street between Fifth and Sixth
-            Avenues.
+            Master of pulling girls, Seoungmin Kim gives us a peek at his best
+            date routes around Hollywood.
           </Text>
         </View>
       </TouchableOpacity>

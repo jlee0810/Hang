@@ -83,7 +83,7 @@ const Map = ({ data }) => {
           waypoints={MOCK_DATA}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={10}
-          strokeColor="blue"
+          strokeColor="gray"
         />
       )}
 
@@ -96,6 +96,20 @@ const Map = ({ data }) => {
           title="Meeting Location"
           description={origin.description}
           identifier="origin"
+          pinColor="green"
+        />
+      )}
+
+      {destination?.location && (
+        <Marker
+          coordinate={{
+            latitude: destination.location.lat,
+            longitude: destination.location.lng,
+          }}
+          title="Final Destination"
+          description={destination.description}
+          identifier="destination"
+          pinColor="red"
         />
       )}
 
@@ -108,6 +122,7 @@ const Map = ({ data }) => {
           }}
           title={waypoint.name}
           identifier={waypoint.id.toString()}
+          pinColor="blue"
         />
       ))}
     </MapView>
